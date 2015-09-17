@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schema.android.com/apk/res/android" id="me.lockate.plugins.curve25519.tests" version="0.1.0">
-	<name>Curve25519</name>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schema.android.com/apk/res/android" id="me.lockate.plugins.curve25519.tests" version="1.0.0">
+	<name>Curve25519 Tests</name>
 	<description>
 		Test vectors for me.lockate.plugins.curve25519
 	</description>
