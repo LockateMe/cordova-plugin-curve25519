@@ -11,7 +11,7 @@
 		<engine name="cordova" version=">=3.0.0" />
 	</engines>
 
-	<js-module name="Curve25519" src="www/Curve25519.js"/>
+	<js-module name="Curve25519" src="www/Curve25519.js">
 		<clobbers target="window.plugins.curve25519"/>
 	</js-module>
 
