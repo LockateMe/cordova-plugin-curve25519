@@ -1,5 +1,5 @@
 #import "Curve25519.h"
-#import "curve25519-donna.c"
+#import "curve25519-donna.h"
 #import <Cordova/CDV.h>
 #import <Cordova/CDVPluginResult.h>
 
