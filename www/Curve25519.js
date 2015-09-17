@@ -25,3 +25,5 @@ function Curve25519(privateKey, publicKey, callback){
 		return typeof s == 'string' && s.length % 2 == 0 && /^([a-f]|[0-9])+$/ig.test(s);
 	}
 }
+
+module.exports = Curve25519;
