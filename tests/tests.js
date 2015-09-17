@@ -45,6 +45,7 @@ exports.defineAutoTests = function(){
 						return;
 					}
 					expect(_result).toEqual(testCase.result);
+					count++;
 					if (count == testCases.length) done();
 				})
 			});
