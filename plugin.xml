@@ -24,6 +24,6 @@
 		<header-file src="src/ios/Curve25519.h"/>
 		<source-file src="src/ios/Curve25519.m"/>
 
-		<source-file src="src/curve25519-donna.c" target-dir="src/ios" />
+		<source-file src="src/curve25519-donna.c"/>
 	</platform>
 </plugin>

@@ -11,19 +11,19 @@
 
 @implementation Curve25519
 
-- (void)curve25519_donna:(CDVInvokedUrlCommand*)command {
+- (void)curve25519:(CDVInvokedUrlCommand*)command {
 	//Parsing args
 	//secret_key, public_key|base_point
 	NSString *secretKeyHex = [command.arguments objectAtIndex: 0];
 	if ([secretKeyHex length] != 64){
 		//Write to error callback, complaining about bad private key size
 		CDVPluginResult *rslt = [CDVPluginResult resultWithStatus: CDVCommandStatus_ERROR messageAsString: @"INVALID_PRIVATE_KEY"];
-		[self writeJavascript: [rslt toErrorCallbackString: command.callbackId]];
+		[self.commandDelegate sendPluginResult: rslt callbackId: command.callbackId];
 		return;
 	}
 
 	//Transform secretKeyHex to secretKey buffer
-	secretKeyHex = [secretKeyHex stringByReplacingOccurencesOfString: @" " withString: @""];
+	secretKeyHex = [secretKeyHex stringByReplacingOccurrencesOfString: @" " withString: @""];
 	NSMutableData *secretKeyMut = [[NSMutableData alloc] init];
 	unsigned char whole_byte;
 	char byte_chars[3] = {'\0', '\0', '\0'};
@@ -43,15 +43,15 @@
 		baseToUse = base_point;
 	} else {
 		//Parse the point. Convert from hex to uint8_t
-		NSString publicKeyHex = [command.arguments objectAtIndex: 1];
+		NSString *publicKeyHex = [command.arguments objectAtIndex: 1];
 		if ([publicKeyHex length] != 64){
 			//Write to error callback, complaining about bad private key size
 			CDVPluginResult *rslt = [CDVPluginResult resultWithStatus: CDVCommandStatus_ERROR messageAsString: @"INVALID_PUBLIC_KEY"];
-			[self writeJavascript: [rslt toErrorCallbackString: command.callbackId]];
+			[self.commandDelegate sendPluginResult: rslt callbackId: command.callbackId];
 			return;
 		}
 
-		publicKeyHex = [publicKeyHex stringByReplacingOccurencesOfString: @" " withString: @""];
+		publicKeyHex = [publicKeyHex stringByReplacingOccurrencesOfString: @" " withString: @""];
 		NSMutableData *publicKeyMut = [[NSMutableData alloc] init];
 		for (int i = 0; i < [publicKeyHex length] / 2; i++){
 			byte_chars[0] = [publicKeyHex characterAtIndex: 2*i];
@@ -72,7 +72,7 @@
 	}
 
 	CDVPlugin *rslt = [CDVPluginResult resultWithStatus: CDVCommandStatus_OK messageAsString: [sharedHex lowercaseString]];
-	[self writeJavascript: [rslt toSuccessCallbackString: command.callbackId]];
+	[self.commandDelegate sendPluginResult: rslt callbackId: command.callbackId];
 }
 
 @end

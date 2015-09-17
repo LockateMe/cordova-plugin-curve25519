@@ -15,7 +15,7 @@ function Curve25519(privateKey, publicKey, callback){
 	var paramsArray = [privateKey];
 	if (publicKey) paramsArray.push(publicKey);
 
-	cordova.exec(resultHandler, callback, 'Curve25519', 'curve25519_donna', paramsArray);
+	cordova.exec(resultHandler, callback, 'Curve25519', 'curve25519', paramsArray);
 
 	function resultHandler(result){
 		callback(undefined, result);
