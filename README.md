@@ -16,12 +16,12 @@ Examples :
 
 ```js
 //Computing your public key
-window.plugins.Curve25519(secretKey, undefined, function(err, publicKey){
+window.plugins.curve25519(secretKey, undefined, function(err, publicKey){
 
 });
 
 //Computing a shared secret
-window.plugins.Curve25519(secretKey, counterpartPublicKey, function(err, sharedSecret){
+window.plugins.curve25519(secretKey, counterpartPublicKey, function(err, sharedSecret){
 
 });
 ```

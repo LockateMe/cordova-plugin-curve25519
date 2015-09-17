@@ -29,14 +29,14 @@ exports.defineAutoTests = function(){
 	describe('me.lockate.plugins.curve25519', function(){
 
 		it('should be defined', function(){
-			expect(window.plugins.Curve25519).toBeDefined();
+			expect(window.plugins.curve25519).toBeDefined();
 		});
 
 		it('generate keypairs and shared secrets', function(done){
 			var count = 0;
 			var fail = jasmine.createSpy('fail');
 			testCases.forEach(function(testCase){
-				window.plugins.Curve25519(testCase.privateKey, testCase.counterpartPublicKey, function(err, _result){
+				window.plugins.curve25519(testCase.privateKey, testCase.counterpartPublicKey, function(err, _result){
 					if (err){
 						fail(err);
 						count++;
