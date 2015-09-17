@@ -33,10 +33,10 @@
 		whole_byte = strtol(byte_chars, NULL, 16);
 		[secretKeyMut appendBytes: &whole_byte length: 1];
 	}
-	const uint8_t* sec = (const uint8_t*) [secretKeyMut bytes];
-	uint8_t* shared[32];
+	const u8* sec = (const uint8_t*) [secretKeyMut bytes];
+	u8 shared[32];
 
-	uint8_t* baseToUse = 0;
+	u8* baseToUse = 0;
 
 	if ([command.arguments count] == 1){
 		//Use base_point = {9}
@@ -61,7 +61,6 @@
 		}
 
 		baseToUse = (uint8_t*) [publicKeyMut bytes];
-
 	}
 
 	curve25519_donna(shared, sec, baseToUse);
@@ -71,7 +70,7 @@
 		[sharedHex appendFormat:@"%02x", shared[i]];
 	}
 
-	CDVPlugin *rslt = [CDVPluginResult resultWithStatus: CDVCommandStatus_OK messageAsString: [sharedHex lowercaseString]];
+	CDVPluginResult *rslt = [CDVPluginResult resultWithStatus: CDVCommandStatus_OK messageAsString: [sharedHex lowercaseString]];
 	[self.commandDelegate sendPluginResult: rslt callbackId: command.callbackId];
 }
 
