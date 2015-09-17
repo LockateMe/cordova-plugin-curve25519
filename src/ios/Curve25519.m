@@ -3,12 +3,6 @@
 #import <Cordova/CDV.h>
 #import <Cordova/CDVPluginResult.h>
 
-@interface Curve25519 ()
-
-@property (strong, nonatomic) NSString *_callbackId;
-
-@end
-
 @implementation Curve25519
 
 - (void)curve25519:(CDVInvokedUrlCommand*)command {
