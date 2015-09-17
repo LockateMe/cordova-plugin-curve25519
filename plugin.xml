@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schema.android.com/apk/res/android" id="me.lockate.plugins.curve25519" version="0.1.0">
+	<name>Curve25519</name>
+	<description>
+		A corodova plugin to be used when Curve25519 is too slow in JavaScript, on iOS especially
+	</description>
+
+	<license>MIT</license>
+	<keywords>curve25519,ecdh,ecc,elliptic,curve,dh,key,exchange</keywords>
+	<engines>
+		<engine name="cordova" version=">=3.0.0" />
+	</engines>
+
+	<js-module name="Curve25519" src="www/Curve25519.js"/>
+		<clobbers target="window.plugins.curve25519"/>
+	</js-module>
+
+	<platform name="ios">
+		<config-file target="config.xml" parent="/*">
+			<feature name="Curve25519">
+				<param name="ios-package" value="Curve25519"/>
+			</feature>
+		</config-file>
+		<header-file src="src/ios/Curve25519.h"/>
+		<source-file src="src/ios/Curve25519.m"/>
+	</platform>
+</plugin>
