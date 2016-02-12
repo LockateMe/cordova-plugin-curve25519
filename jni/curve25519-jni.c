@@ -11,7 +11,7 @@
 
 static void throwException(JNIEnv* env, char *msg);
 
-JNIEXPORT jbyteArray JNICALL Java_me_lockate_plugins_curve25519(
+JNIEXPORT jbyteArray JNICALL Java_me_lockate_plugins_Curve25519_c25519donna(
 	JNIEnv* env,
 	jobject self,
 	jbyteArray privateKey,

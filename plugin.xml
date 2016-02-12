@@ -37,6 +37,21 @@
 		</config-file>
 		<source-file src="src/android/me/lockate/plugins/Curve25519.java" target-dir="src/me/lockate/plugins" />
 
-		<source-file src="libs/"
+		<source-file src="libs/arm64-v8a/libcurve25519_lockateme.so" target-dir="src/main/jniLibs/arm64-v8a/" />
+		<source-file src="libs/armeabi/libcurve25519_lockateme.so" target-dir="src/main/jniLibs/armeabi/" />
+		<source-file src="libs/armeabi-v7a/libcurve25519_lockateme.so" target-dir="src/main/jniLibs/armeabi-v7a/" />
+		<source-file src="libs/mips/libcurve25519_lockateme.so" target-dir="src/main/jniLibs/mips/" />
+		<source-file src="libs/mips64/libcurve25519_lockateme.so" target-dir="src/main/jniLibs/mips64/" />
+		<source-file src="libs/x86/libcurve25519_lockateme.so" target-dir="src/main/jniLibs/x86/" />
+		<source-file src="libs/x86_64/libcurve25519_lockateme.so" target-dir="src/main/jniLibs/x86_64/" />
+
+		<source-file src="libs/arm64-v8a/libcurve25519_lockateme.so" target-dir="libs/arm64-v8a/" />
+		<source-file src="libs/armeabi/libcurve25519_lockateme.so" target-dir="libs/armeabi/" />
+		<source-file src="libs/armeabi-v7a/libcurve25519_lockateme.so" target-dir="libs/armeabi-v7a/" />
+		<source-file src="libs/mips/libcurve25519_lockateme.so" target-dir="libs/mips/" />
+		<source-file src="libs/mips64/libcurve25519_lockateme.so" target-dir="libs/mips64/" />
+		<source-file src="libs/x86/libcurve25519_lockateme.so" target-dir="libs/x86/" />
+		<source-file src="libs/x86_64/libcurve25519_lockateme.so" target-dir="libs/x86_64/" />
+
 	</platform>
 </plugin>

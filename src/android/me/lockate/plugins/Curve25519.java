@@ -13,9 +13,41 @@ public class Curve25519 extends CordovaPlugin {
 	private static final String LOGTAG = "Curve25519";
 	private static char[] HEX_CHARS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
+	private static byte[] BASE_POINT = {9};
+
+	static {
+		System.loadLibrary("curve25519_lockateme");
+	}
+
 	@Override
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 		if (action.equals("curve25519")){
+
+			String privateKeyHex = args.getString(0);
+			byte[] privateKey = fromHex(privateKeyHex);
+			byte[] basePointToUse;
+
+			if (args.Length() > 1){
+				String publicKeyHex = args.getString(1);
+				basePointToUse = fromHex(publicKeyHex)
+			} else {
+				basePointToUse = BASE_POINT;
+			}
+
+			cordova.getThreadPool().execute(new Runnable(){
+				public void run(){
+					try {
+						byte[] sharedSecret = c25519donna(privateKey, basePointToUse);
+						JSONArray jsonResult = new JSONArray();
+						for (int i = 0; i < sharedSecret.length; i++){
+							jsonResult.put((int) sharedSecret[i] & 0x000000ff);
+						}
+						callbackContext.success(jsonResult);
+					} catch (Exception e){
+						callbackContext.error(e.getMessage());
+					}
+				}
+			});
 
 			return true;
 		} else {
@@ -48,7 +80,7 @@ public class Curve25519 extends CordovaPlugin {
 				if (rChar == HEX_CHARS[j]) r = (j << 4);
 			}
 			byte currentByte = (byte) l * 16 + r;
-			original[i / 2] = currentByte;
+			original[(int) i / 2] = currentByte;
 		}
 
 		return original;
