@@ -1,4 +1,5 @@
 #include <errno.h>
+#include <string.h>
 #include <jni.h>
 #include <android/log.h>
 
@@ -13,7 +14,7 @@ static void throwException(JNIEnv* env, char *msg);
 
 JNIEXPORT jbyteArray JNICALL Java_me_lockate_plugins_Curve25519_c25519donna(
 	JNIEnv* env,
-	jobject self,
+	jobject thiz,
 	jbyteArray privateKey,
 	jbyteArray basePoint)
 {
