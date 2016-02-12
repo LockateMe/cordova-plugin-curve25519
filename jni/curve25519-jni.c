@@ -1,4 +1,5 @@
 #include <errno.h>
+#include <stdint.h>
 #include <string.h>
 #include <jni.h>
 #include <android/log.h>
@@ -12,11 +13,13 @@
 
 static void throwException(JNIEnv* env, char *msg);
 
-JNIEXPORT jbyteArray JNICALL Java_me_lockate_plugins_Curve25519_c25519donna(
+JNIEXPORT jbyteArray JNICALL Java_me_lockate_plugins_Curve25519_c25519donna
+(
 	JNIEnv* env,
 	jobject thiz,
 	jbyteArray privateKey,
-	jbyteArray basePoint)
+	jbyteArray basePoint
+)
 {
 	jbyte *_privateKey = (*env)->GetByteArrayElements(env, privateKey, NULL);
 	if ((*env)->ExceptionOccurred(env)){
@@ -30,7 +33,7 @@ JNIEXPORT jbyteArray JNICALL Java_me_lockate_plugins_Curve25519_c25519donna(
 		goto END;
 	}
 
-	uint8_t *sharedSecret = malloc(sizeof(uint8_t) * 32);
+	u8 *sharedSecret = malloc(sizeof(u8) * 32);
 	if (sharedSecret == NULL){
 		LOGE("Cannot allocate shared secret buffer");
 		throwException(env, "Cannot allocate shared secret buffer");
@@ -40,15 +43,15 @@ JNIEXPORT jbyteArray JNICALL Java_me_lockate_plugins_Curve25519_c25519donna(
 	curve25519_donna(sharedSecret, _privateKey, _basePoint);
 
 	jbyteArray result = (*env)->NewByteArray(env, 32);
-	if ((*env)->ExceptionOccurred()){
+	if ((*env)->ExceptionOccurred(env)){
 		LOGE("Failed to allocate result buffer");
-		throwException("Failed to allocate result buffer");
+		throwException(env, "Failed to allocate result buffer");
 		goto END;
 	}
 	(*env)->SetByteArrayRegion(env, result, 0, 32, (jbyte*) sharedSecret);
-	if ((*env)->ExceptionOccurred()){
+	if ((*env)->ExceptionOccurred(env)){
 		LOGE("Failed to copy shared secret to result buffer");
-		throwException("Failed to copy shared secret to result buffer");
+		throwException(env, "Failed to copy shared secret to result buffer");
 		goto END;
 	}
 
@@ -63,4 +66,20 @@ JNIEXPORT jbyteArray JNICALL Java_me_lockate_plugins_Curve25519_c25519donna(
 static void throwException(JNIEnv* env, char* message){
 	jclass JC_Exception = (*env)->FindClass(env, "java/lang/Exception");
 	(*env)->ThrowNew(env, JC_Exception, message);
+}
+
+JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* aReserved){
+	JNIEnv* env;
+
+	if ((*vm)->GetEnv(vm, (void **) &env, JNI_VERSION_1_6) != JNI_OK){
+		LOGE("Failed to get environment");
+		return JNI_ERR;
+	}
+
+	return JNI_VERSION_1_6;
+}
+
+JNIEXPORT void JNICALL JNI_OnUnLoad(JavaVM* vm, void* aReserved){
+	JNIEnv* env;
+	//What do here since we didn't special Java classes?
 }
