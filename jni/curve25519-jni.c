@@ -48,6 +48,7 @@ JNIEXPORT jbyteArray JNICALL Java_me_lockate_plugins_Curve25519_c25519donna
 		throwException(env, "Failed to allocate result buffer");
 		goto END;
 	}
+	
 	(*env)->SetByteArrayRegion(env, result, 0, 32, (jbyte*) sharedSecret);
 	if ((*env)->ExceptionOccurred(env)){
 		LOGE("Failed to copy shared secret to result buffer");
@@ -56,8 +57,8 @@ JNIEXPORT jbyteArray JNICALL Java_me_lockate_plugins_Curve25519_c25519donna
 	}
 
 	END:
-		if (_privateKey) (*env)->ReleaseByteArrayElements(env, _privateKey, privateKey, JNI_ABORT);
-		if (_basePoint) (*env)->ReleaseByteArrayElements(env, _basePoint, basePoint, JNI_ABORT);
+		if (_privateKey) (*env)->ReleaseByteArrayElements(env, privateKey, _privateKey, JNI_ABORT);
+		if (_basePoint) (*env)->ReleaseByteArrayElements(env, basePoint, _basePoint, JNI_ABORT);
 		if (sharedSecret) free(sharedSecret);
 
 	return result;

@@ -11,7 +11,7 @@ import org.json.JSONObject;
 
 public class Curve25519 extends CordovaPlugin {
 	private static final String LOGTAG = "Curve25519";
-	private static char[] HEX_CHARS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+	private static char[] HEX_CHARS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 
 	private static byte[] BASE_POINT = {9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; //32 bytes long. Beginning with 9
 
@@ -42,11 +42,12 @@ public class Curve25519 extends CordovaPlugin {
 				public void run(){
 					try {
 						byte[] sharedSecret = c25519donna(privateKey, basePointToUseFinal);
-						JSONArray jsonResult = new JSONArray();
+						callbackContext.success(dumpHex(sharedSecret));
+						/*JSONArray jsonResult = new JSONArray();
 						for (int i = 0; i < sharedSecret.length; i++){
 							jsonResult.put((int) sharedSecret[i] & 0x000000ff);
 						}
-						callbackContext.success(jsonResult);
+						callbackContext.success(jsonResult);*/
 					} catch (Exception e){
 						callbackContext.error(e.getMessage());
 					}
@@ -71,6 +72,7 @@ public class Curve25519 extends CordovaPlugin {
 	}
 
 	private static byte[] fromHex(String h){
+		h = h.toLowerCase();
 		int hLength = h.length();
 		if (hLength % 2 != 0) return null;
 		byte[] original = new byte[(int) hLength / 2];
