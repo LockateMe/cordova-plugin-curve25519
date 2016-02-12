@@ -37,6 +37,9 @@ exports.defineAutoTests = function(){
 			var fail = jasmine.createSpy('fail');
 			testCases.forEach(function(testCase){
 				window.plugins.curve25519(testCase.privateKey, testCase.counterpartPublicKey, function(err, _result){
+					//We pass the "reference"/name of counterpartPublicKey in each test case, whether it exists or not.
+					//If it doesn't exist, the call performed will be a keypair generation
+					//If it exists, a shared secret is computed
 					if (err){
 						fail(err);
 						count++;
