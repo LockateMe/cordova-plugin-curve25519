@@ -27,4 +27,16 @@
 		<header-file src="src/curve25519-donna.h"/>
 		<source-file src="src/curve25519-donna.c"/>
 	</platform>
+
+	<platform name="android">
+		<config-file target="res/xml/config.xml">
+			<feature name="Curve25519">
+				<param name="android-package" value="me.lockate.plugin.Curve25519" />
+				<param name="onload" value="true" />
+			</feature>
+		</config-file>
+		<source-file src="src/android/me/lockate/plugins/Curve25519.java" target-dir="src/me/lockate/plugins" />
+
+		<source-file src="libs/"
+	</platform>
 </plugin>
