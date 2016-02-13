@@ -1,0 +1,43 @@
+{
+  "name": "cordova-plugin-curve25519",
+  "version": "1.1.0",
+  "description": "Curve25519 key agreement algorithm, for Cordova apps on iOS and Android",
+  "main": "index.js",
+  "cordova": {
+    "id": "cordova-plugin-curve25519",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LockateMe/cordova-plugin-curve25519.git"
+  },
+  "keywords": [
+    "cordova",
+    "cordova-ios",
+    "cordova-android",
+    "ecosystem:cordova",
+    "key-agreement",
+    "curve25519",
+    "ecdh",
+    "crypto",
+    "cryptography"
+  ],
+  "devDependencies": {
+    "cordova-plugin-test-framework": ">=1.0.0"
+  },
+  "author": "Ahmad Benmrad",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LockateMe/cordova-plugin-curve25519/issues"
+  },
+  "homepage": "https://github.com/LockateMe/cordova-plugin-curve25519#readme"
+}
