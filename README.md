@@ -8,7 +8,7 @@ The Curve25519 implementation in this plugin is [Adam Langley's curve25519-donna
 
 ## Installation
 
-	phonegap plugin add https://github.com/LockateMe/cordova-plugin-curve25519.git
+	phonegap plugin add cordova-plugin-curve25519
 
 ## Usage
 
